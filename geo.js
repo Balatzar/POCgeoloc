@@ -1,20 +1,15 @@
 //jshint esversion: 6
 
-(() => {
+(function() {
 
-  localisation();
-
-  setInterval(localisation, 5000);
+  navigator.geolocation.watchPosition(updateDOM);
 
 })();
 
-function localisation() {
-  console.log("getting localisation");
-  navigator.geolocation.getCurrentPosition(pos => {
-    var coords = pos.coords;
-    console.log(coords);
-    lat.innerText = coords.latitude;
-    lng.innerText = coords.longitude;
-    acc.innerText = coords.accuracy + " mètres";
-  });
+function updateDOM(pos) {
+  var coords = pos.coords;
+  console.log(coords);
+  lat.innerText = coords.latitude;
+  lng.innerText = coords.longitude;
+  acc.innerText = coords.accuracy;
 }
